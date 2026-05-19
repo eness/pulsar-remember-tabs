@@ -3,7 +3,7 @@
 
 ![remember-tabs banner](banner.jpg)
 
-# remember-tabs
+# Remember Tabs for Pulsar
 
 Remember open file tabs in [Pulsar](https://pulsar-edit.dev/) and restore them after the editor restarts.
 
