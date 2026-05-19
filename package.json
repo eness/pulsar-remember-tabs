@@ -1,7 +1,7 @@
 {
   "name": "remember-tabs",
   "main": "./lib/remember-tabs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Restore open file tabs when Pulsar restarts.",
   "keywords": [
     "tabs",
@@ -14,6 +14,10 @@
     "url": "https://enes.dev"
   },
   "homepage": "https://enes.dev",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/eness/pulsar-remember-tabs.git"
+  },
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
