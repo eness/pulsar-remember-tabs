@@ -12,6 +12,7 @@ Remember open file tabs in [Pulsar](https://pulsar-edit.dev/) and restore them a
 ## Features
 
 - Restores open file tabs after Pulsar restart or window reload.
+- Restores unsaved untitled editor tabs with their text.
 - Works without an open project folder.
 - Keeps the previously active tab active after restore.
 - Avoids reopening duplicate tabs that are already open.
@@ -19,9 +20,9 @@ Remember open file tabs in [Pulsar](https://pulsar-edit.dev/) and restore them a
 
 ## How it works?
 
-The package watches Pulsar workspace tab changes and stores the absolute paths of open file tabs in Pulsar config. On the next startup, it reads the saved list and reopens every existing file path.
+The package watches Pulsar workspace tab and editor text changes, then stores open file paths and non-empty untitled editor text in Pulsar config. On the next startup, it reads the saved list, reopens every existing file path, and recreates unsaved untitled tabs with their previous text.
 
-Only tabs backed by real files on disk are saved. Untitled editors and unsaved text buffers are not restored.
+Only file tabs backed by real files on disk and non-empty untitled text editors are saved.
 
 ## Installation
 
@@ -37,7 +38,7 @@ Then reload Pulsar or restart the editor.
 
 Open files as usual. The package works in the background.
 
-When Pulsar restarts, your previously open file tabs are restored automatically.
+When Pulsar restarts, your previously open file tabs and non-empty untitled tabs are restored automatically.
 
 ## Development
 
@@ -55,8 +56,8 @@ pulsar --test spec
 
 ## Limitations
 
-- Unsaved untitled editors are not restored.
 - Deleted, moved, or inaccessible files are skipped.
+- Empty untitled editors are skipped.
 - Non-file tabs, settings pages, and package-provided custom views are ignored.
 
 ## Author
@@ -69,7 +70,7 @@ enes sönmez <root{@}enes.dev>
 
 MIT
 
-[Badge Version]: https://img.shields.io/badge/version-1.0.0-blue.svg
+[Badge Version]: https://img.shields.io/badge/version-1.1.0-blue.svg
 [Badge License]: https://img.shields.io/badge/license-MIT-green.svg
 [Releases]: ../../releases
 [License]: LICENSE.md

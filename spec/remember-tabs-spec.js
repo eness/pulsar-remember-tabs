@@ -53,6 +53,8 @@ describe('RememberTabs', () => {
       const savedPaths = savedTabs.map(tab => tab.path);
 
       expect(savedPaths).toEqual([firstFilePath, secondFilePath]);
+      expect(savedTabs[0].type).toBe('file');
+      expect(savedTabs[1].type).toBe('file');
       expect(savedTabs[0].active).toBe(false);
       expect(savedTabs[1].active).toBe(true);
       expect(atom.config.get(CONFIG_KEY)).toEqual(savedTabs);
@@ -74,6 +76,51 @@ describe('RememberTabs', () => {
       expect(openPaths).toContain(firstFilePath);
       expect(openPaths).toContain(secondFilePath);
       expect(atom.workspace.getActiveTextEditor().getPath()).toBe(secondFilePath);
+    });
+  });
+
+  it('persists untitled editor text', () => {
+    waitsForPromise(() => {
+      return atom.workspace.open().then(editor => {
+        editor.setText('draft notes');
+        return atom.workspace.open(firstFilePath);
+      });
+    });
+
+    runs(() => {
+      packageMain.readyToSave = true;
+
+      const savedTabs = packageMain.saveOpenTabs();
+
+      expect(savedTabs).toEqual([
+        {
+          type: 'untitled',
+          text: 'draft notes',
+          active: false
+        },
+        {
+          type: 'file',
+          path: firstFilePath,
+          active: true
+        }
+      ]);
+      expect(atom.config.get(CONFIG_KEY)).toEqual(savedTabs);
+    });
+  });
+
+  it('restores untitled editor text', () => {
+    atom.config.set(CONFIG_KEY, [
+      { type: 'untitled', text: 'draft notes', active: true }
+    ]);
+
+    waitsForPromise(() => packageMain.restoreSavedTabs());
+
+    runs(() => {
+      const untitledEditors = atom.workspace.getTextEditors().filter(editor => !editor.getPath());
+
+      expect(untitledEditors.length).toBe(1);
+      expect(untitledEditors[0].getText()).toBe('draft notes');
+      expect(atom.workspace.getActiveTextEditor()).toBe(untitledEditors[0]);
     });
   });
 });
