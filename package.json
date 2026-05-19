@@ -1,0 +1,23 @@
+{
+  "name": "remember-tabs",
+  "main": "./lib/remember-tabs",
+  "version": "1.0.0",
+  "description": "Restore open file tabs when Pulsar restarts.",
+  "keywords": [
+    "tabs",
+    "restore",
+    "session"
+  ],
+  "author": {
+    "name": "enes sönmez",
+    "email": "enes@sonmez.net",
+    "url": "https://enes.dev"
+  },
+  "homepage": "https://enes.dev",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
