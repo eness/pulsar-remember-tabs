@@ -1,7 +1,7 @@
 {
   "name": "remember-tabs",
   "main": "./lib/remember-tabs",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Restore open file tabs when Pulsar restarts.",
   "keywords": [
     "tabs",
